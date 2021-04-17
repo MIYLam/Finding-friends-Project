@@ -5,12 +5,13 @@ class MainWindow(wid.QWidget):
         super().__init__()
         self.setWindowTitle("Calculator")
         self.setLayout(wid.QVBoxLayout())
+        self.resize(1000,500)
         self.dialoguelayout()
         self.show()
         
     def dialoguelayout(self):
-        container = wid.QWidget()
-        container.setLayout(wid.QGridLayout())
+        self.container = wid.QWidget()
+        self.container.setLayout(wid.QGridLayout())
         
         dialoguebutton_1 = wid.QPushButton("sample text1")
         dialoguebutton_2 = wid.QPushButton("sample text2")
@@ -20,8 +21,9 @@ class MainWindow(wid.QWidget):
         container.layout().addWidget(dialoguebutton_2,4,2,1,6)
         container.layout().addWidget(dialoguebutton_3,5,2,1,6)
         
-        self.layout().addWidget(container)
-        
+        self.layout().addWidget(self.container)
+
+        picture = 
 
 app = wid.QApplication([])
 mw = MainWindow()
