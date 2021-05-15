@@ -3,7 +3,7 @@ import PyQt5.QtWidgets as wid
 class MainWindow(wid.QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Calculator")
+        self.setWindowTitle("Finding friends")
         self.setLayout(wid.QVBoxLayout())
         self.resize(1000,500)
         self.dialoguelayout()
@@ -17,13 +17,13 @@ class MainWindow(wid.QWidget):
         dialoguebutton_2 = wid.QPushButton("sample text2")
         dialoguebutton_3 = wid.QPushButton("sample text3")
         
-        container.layout().addWidget(dialoguebutton_1,3,2,1,6)
-        container.layout().addWidget(dialoguebutton_2,4,2,1,6)
-        container.layout().addWidget(dialoguebutton_3,5,2,1,6)
+        self.container.layout().addWidget(dialoguebutton_1,3,2,1,6)
+        self.container.layout().addWidget(dialoguebutton_2,4,2,1,6)
+        self.container.layout().addWidget(dialoguebutton_3,5,2,1,6)
         
         self.layout().addWidget(self.container)
 
-        picture = 
+
 
 app = wid.QApplication([])
 mw = MainWindow()
