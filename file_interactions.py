@@ -1,16 +1,15 @@
-import csv
+from csv import *
 from random import *
 morning_file = open("morningquestions.csv", "r")
 
 class Questions:            #Using to 
-    def __init__(self, questions):
-        self.questions = questions
+    def __init__(self, file_content):
+        self.questions = file_content
 
     def questions_reader(self):
         question_list = []
-        reader = csv.reader(self.questions, delimiter=',')
         line_counter = 0
-        for row in reader:
+        for row in self.questions:
             if line_counter == 0:
                 line_counter = line_counter + 1
             else:
@@ -34,23 +33,21 @@ class Dialogue:
     def __init__(self, csv_file):
         self.file = csv_file
 
-
     def dialogue_list(self, question):
         dialogue_options = []
         line_counter = 0
-        reader = csv.reader(self.file, delimiter=',') 
-        for row in reader:
+        for row in self.file:
             if row[0] != question:
                 line_counter = line_counter + 1
             else:
                 dialogue_options.extend([row[1],row[3],row[5]])
+        
         return dialogue_options       
     
     def dialogue_type(self, question):            
         dialogue_types = {}
-        reader = csv.reader(self.file, delimiter=',')
         line_counter = 0
-        for row in reader:
+        for row in self.file:
             if row[0] != question:
                 line_counter = line_counter + 1
             else:
@@ -63,9 +60,14 @@ class Dialogue:
 
                            
 
+file_contents = []
+read_file = reader(morning_file, delimiter=',')
+for row in read_file:
+    file_contents.append(row)
 
-morning_questions =  Questions(morning_file).questions_reader() #These variables need to be interated throuhg a for loop 
-morning_dialogue = Dialogue(morning_file).dialogue_list(morning_questions)
-
-
+morning_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop 
 chosen_question = Question_selection(morning_questions).question_selector()
+morning_dialogue = Dialogue(file_contents).dialogue_list(chosen_question)
+
+
+

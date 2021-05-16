@@ -12,9 +12,9 @@ class Game_screen(wid.QWidget):
         self.show()
         
     def playing_layout(self):
-        dialoguebutton_1 = wid.QPushButton("sample text1")
-        dialoguebutton_2 = wid.QPushButton("sample text2")
-        dialoguebutton_3 = wid.QPushButton("sample text3")
+        dialoguebutton_1 = wid.QPushButton(morning_dialogue[0])
+        dialoguebutton_2 = wid.QPushButton(morning_dialogue[1])
+        dialoguebutton_3 = wid.QPushButton(morning_dialogue[2])
         
         self.container = wid.QGridLayout()
         
