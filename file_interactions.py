@@ -1,7 +1,7 @@
 from csv import reader
 from random import randint
-
-
+from time_counter import *
+time_of_day = "morning"
 class Questions:            #Using to 
     def __init__(self, file_content):
         self.questions = file_content
@@ -61,14 +61,11 @@ class Dialogue:
                            
 
 file_contents = []
-with open("morningquestions.csv", "r") as morning_file:
+with open(time_of_day + "questions.csv", "r") as morning_file:
     read_file = reader(morning_file, delimiter=',')
     for row in read_file:
         file_contents.append(row)
 
-morning_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop 
-chosen_question = Question_selection(morning_questions).question_selector()
-morning_dialogue = Dialogue(file_contents).dialogue_list(chosen_question)
-
-
-
+dialogue_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop 
+chosen_question = Question_selection(dialogue_questions).question_selector()
+current_dialogue = Dialogue(file_contents).dialogue_list(chosen_question)

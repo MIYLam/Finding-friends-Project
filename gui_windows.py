@@ -2,7 +2,12 @@ import PyQt5.QtWidgets as wid
 from PyQt5.QtGui import *
 from PyQt5.QtCore import * 
 from file_interactions import *
+
+from time_counter import *
 import sys
+
+
+
 
 class Menu_Screen(wid.QWidget):
     def __init__(self):
@@ -39,7 +44,6 @@ class Menu_Screen(wid.QWidget):
     def information(self):
         self.start = information()
         self.start.show()
-
         
 
 
@@ -49,14 +53,19 @@ class Game_screen(wid.QWidget):
         super().__init__()
         self.setWindowTitle("Finding friends")
         self.resize(1000,500)
+        self.conversation_counter = 0
         self.playing_layout()
+        
         self.show()
         
     def playing_layout(self):
-        dialoguebutton_1 = wid.QPushButton(morning_dialogue[0])
-        dialoguebutton_2 = wid.QPushButton(morning_dialogue[1])
-        dialoguebutton_3 = wid.QPushButton(morning_dialogue[2])
+
+        dialoguebutton_1 = wid.QPushButton(current_dialogue[0])
+        dialoguebutton_2 = wid.QPushButton(current_dialogue[1])
+        dialoguebutton_3 = wid.QPushButton(current_dialogue[2])
         
+
+
         self.container = wid.QGridLayout()
         
         self.picture_raw = QPixmap('tester.jpg')
@@ -68,6 +77,8 @@ class Game_screen(wid.QWidget):
 
         self.character_dialogue = wid.QLabel(chosen_question)
         self.container.layout().addWidget(self.character_dialogue) 
+
+
 
         self.dialogue_container = wid.QWidget()
         self.dialogue_container.setLayout(wid.QVBoxLayout())
@@ -93,7 +104,11 @@ class Game_screen(wid.QWidget):
 
         self.container.layout().addWidget(self.dialogue_container)
         self.setLayout(self.container)
+
+
         
+    
+
 class information(wid.QWidget):
     def __init__(self):
         super().__init__()
