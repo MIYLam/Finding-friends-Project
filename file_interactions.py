@@ -1,6 +1,6 @@
-from csv import *
-from random import *
-morning_file = open("morningquestions.csv", "r")
+from csv import reader
+from random import randint
+
 
 class Questions:            #Using to 
     def __init__(self, file_content):
@@ -61,9 +61,10 @@ class Dialogue:
                            
 
 file_contents = []
-read_file = reader(morning_file, delimiter=',')
-for row in read_file:
-    file_contents.append(row)
+with open("morningquestions.csv", "r") as morning_file:
+    read_file = reader(morning_file, delimiter=',')
+    for row in read_file:
+        file_contents.append(row)
 
 morning_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop 
 chosen_question = Question_selection(morning_questions).question_selector()
