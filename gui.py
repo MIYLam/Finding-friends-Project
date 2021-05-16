@@ -1,8 +1,9 @@
 import PyQt5.QtWidgets as wid
 from PyQt5.QtGui import *
 from PyQt5.QtCore import * 
+from file_interactions import *
 import sys
-class MainWindow(wid.QWidget):
+class Game_screen(wid.QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Finding friends")
@@ -24,7 +25,7 @@ class MainWindow(wid.QWidget):
 
         self.container.layout().addWidget(self.picture_final)
 
-        self.character_dialogue = wid.QLabel("please work")
+        self.character_dialogue = wid.QLabel(chosen_question)
         self.container.layout().addWidget(self.character_dialogue) 
 
       
@@ -54,5 +55,5 @@ class MainWindow(wid.QWidget):
 
 
 app = wid.QApplication([])
-mw = MainWindow()
+mw = Game_screen()
 app.exec_()
