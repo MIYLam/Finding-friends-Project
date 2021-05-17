@@ -70,6 +70,4 @@ with open(time_of_day + "questions.csv", "r") as morning_file:
 
 
 
-dialogue_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop        
-chosen_question = Question_selection(dialogue_questions).question_selector()
-current_dialogue = Dialogue(file_contents).dialogue_list(chosen_question)
+

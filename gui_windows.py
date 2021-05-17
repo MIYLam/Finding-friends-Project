@@ -3,7 +3,7 @@ import PyQt5.QtWidgets as wid
 from PyQt5.QtGui import *
 from PyQt5.QtCore import * 
 from file_interactions import *
-
+from character_interaction import *
 from time_counter import *
 import sys
 
@@ -55,30 +55,50 @@ class Game_screen(wid.QWidget):
         self.setWindowTitle("Finding friends")
         self.resize(1000,500)
         self.conversation_counter = 0
-        self.playing_layout()
         
-        self.show()
+        self.dialogue_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop        
+        self.chosen_question = Question_selection(self.dialogue_questions).question_selector()
+        self.current_dialogue = Dialogue(file_contents).dialogue_list(self.chosen_question)
         
-    def playing_layout(self):
-
-        dialoguebutton_1 = wid.QPushButton(current_dialogue[0])
-        dialoguebutton_2 = wid.QPushButton(current_dialogue[1])
-        dialoguebutton_3 = wid.QPushButton(current_dialogue[2])
-        
-        dialoguebutton_1.clicked.connect(self.button_press)
-        dialoguebutton_2.clicked.connect(self.button_press)
-        dialoguebutton_3.clicked.connect(self.button_press)
 
         self.container = wid.QGridLayout()
-        
         self.picture_raw = QPixmap('tester.jpg')
         self.picture_resized = self.picture_raw.scaled(500, 450, Qt.KeepAspectRatio)
         self.picture_final = wid.QLabel()
         self.picture_final.setPixmap(self.picture_resized)
         self.container.layout().addWidget(self.picture_final)
+        
+        
+        
+        self.button_setup()
+        
+        
+        self.setLayout(self.container)
+
+        
+        self.show()
+        
 
 
-        self.character_dialogue = wid.QLabel(chosen_question)
+
+
+
+
+        
+    def button_setup(self):    
+        dialoguebutton_1 = wid.QPushButton(self.current_dialogue[0])
+        dialoguebutton_2 = wid.QPushButton(self.current_dialogue[1])
+        dialoguebutton_3 = wid.QPushButton(self.current_dialogue[2])
+
+
+        
+
+        
+        dialoguebutton_1.clicked.connect(self.button_press)
+        dialoguebutton_2.clicked.connect(self.button_press)
+        dialoguebutton_3.clicked.connect(self.button_press)
+
+        self.character_dialogue = wid.QLabel(self.chosen_question)
         self.container.layout().addWidget(self.character_dialogue) 
 
 
@@ -106,13 +126,33 @@ class Game_screen(wid.QWidget):
         self.dialogue_container.layout().addWidget(self.bottom_row)
 
         self.container.layout().addWidget(self.dialogue_container)
-        self.setLayout(self.container)
-    
-    
+        
+
     def button_press(self):
+        
         self.conversation_counter = self.conversation_counter + 1
-        if self.conversation_counter == 7:
-            self.conversation_counter = 0
+        
+        if self.conversation_counter%2 == 1:
+            self.dialogue_container.deleteLater()
+            self.character_dialogue.setText("sdfjhsadjfhskaldjfh")
+            self.next_button = wid.QPushButton("Next")
+            self.next_button.clicked.connect(self.moveon)
+            self.container.layout().addWidget(self.next_button,4,1,1,1)
+
+
+        
+    def moveon(self):
+        self.conversation_counter = self.conversation_counter + 1
+
+        if self.conversation_counter%2 == 0:
+            self.next_button.deleteLater()
+            self.character_dialogue.deleteLater()
+            self.button_setup()
+
+
+        
+    
+
 
             
 
