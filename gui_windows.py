@@ -1,3 +1,4 @@
+from os import kill
 from typing import Counter
 import PyQt5.QtWidgets as wid
 from PyQt5.QtGui import *
@@ -17,7 +18,7 @@ class Menu_Screen(wid.QWidget):
         self.resize(1000,500)
         
         HEADING_FONT = QFont('Ariel', 36)
-        
+        NORMAL_FONT = QFont('Ariel', 24)
         win = wid.QWidget()
         grid = wid.QGridLayout()
         win.setLayout(grid)
@@ -26,13 +27,19 @@ class Menu_Screen(wid.QWidget):
         title.setFont(HEADING_FONT)
         grid.addWidget(title,1,1,1,1)
         
+        subtext = wid.QLabel("click the click me")
+        subtext.setFont(NORMAL_FONT)
+        grid.addWidget(subtext,2,1,1,1)
+        
+
+
         starting_button = wid.QPushButton('Start')
         starting_button.clicked.connect(self.start_game)
-        grid.addWidget(starting_button,2,1,1,1)
+        grid.addWidget(starting_button,3,1,1,1)
 
         click_me_button = wid.QPushButton("Click me!")
         click_me_button.clicked.connect(self.information)
-        grid.addWidget(click_me_button,2,2,1,1,)
+        grid.addWidget(click_me_button,3,2,1,1,)
 
         self.setLayout(grid)   
         self.show()
@@ -55,11 +62,7 @@ class Game_screen(wid.QWidget):
         self.setWindowTitle("Finding friends")
         self.resize(1000,500)
         self.conversation_counter = 0
-        
-        self.dialogue_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop        
-        self.chosen_question = Question_selection(self.dialogue_questions).question_selector()
-        self.current_dialogue = Dialogue(file_contents).dialogue_list(self.chosen_question)
-        
+
 
         self.container = wid.QGridLayout()
         self.picture_raw = QPixmap('tester.jpg')
@@ -74,7 +77,7 @@ class Game_screen(wid.QWidget):
         
         
         self.setLayout(self.container)
-
+    
         
         self.show()
         
@@ -86,6 +89,10 @@ class Game_screen(wid.QWidget):
 
         
     def button_setup(self):    
+        self.dialogue_questions =  Questions(file_contents).questions_reader() #These variables need to be interated throuhg a for loop        
+        self.chosen_question = Question_selection(self.dialogue_questions).question_selector()
+        self.current_dialogue = Dialogue(file_contents).dialogue_list(self.chosen_question)
+        
         dialoguebutton_1 = wid.QPushButton(self.current_dialogue[0])
         dialoguebutton_2 = wid.QPushButton(self.current_dialogue[1])
         dialoguebutton_3 = wid.QPushButton(self.current_dialogue[2])
@@ -131,7 +138,7 @@ class Game_screen(wid.QWidget):
     def button_press(self):
         
         self.conversation_counter = self.conversation_counter + 1
-        
+        print(self.conversation_counter)
         if self.conversation_counter%2 == 1:
             self.dialogue_container.deleteLater()
             self.character_dialogue.setText("sdfjhsadjfhskaldjfh")
@@ -143,7 +150,9 @@ class Game_screen(wid.QWidget):
         
     def moveon(self):
         self.conversation_counter = self.conversation_counter + 1
-
+        print(self.conversation_counter)
+        if self.conversation_counter == 8:
+            self.close()
         if self.conversation_counter%2 == 0:
             self.next_button.deleteLater()
             self.character_dialogue.deleteLater()
