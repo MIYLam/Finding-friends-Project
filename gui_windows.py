@@ -1,3 +1,4 @@
+from typing import Counter
 import PyQt5.QtWidgets as wid
 from PyQt5.QtGui import *
 from PyQt5.QtCore import * 
@@ -64,7 +65,9 @@ class Game_screen(wid.QWidget):
         dialoguebutton_2 = wid.QPushButton(current_dialogue[1])
         dialoguebutton_3 = wid.QPushButton(current_dialogue[2])
         
-
+        dialoguebutton_1.clicked.connect(self.button_press)
+        dialoguebutton_2.clicked.connect(self.button_press)
+        dialoguebutton_3.clicked.connect(self.button_press)
 
         self.container = wid.QGridLayout()
         
@@ -104,7 +107,17 @@ class Game_screen(wid.QWidget):
 
         self.container.layout().addWidget(self.dialogue_container)
         self.setLayout(self.container)
+    
+    
+    def button_press(self):
+        self.conversation_counter = self.conversation_counter + 1
+        if self.conversation_counter == 7:
+            self.conversation_counter = 0
 
+            
+
+        
+        
 
         
     
