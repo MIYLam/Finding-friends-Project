@@ -1,8 +1,10 @@
 from csv import reader
 from random import randint
-from time_counter import *
 
+#Using a global variable to assist with CSV reading
 time_of_day = "morning"
+
+#The overall class for handling the CSV reading and processing the information
 class Questions:            #Using to 
     def __init__(self, used_questions):
         self.question_list = []
@@ -19,6 +21,8 @@ class Questions:            #Using to
         self.dialogue_list()
         self.dialogue_type()
 
+
+    #Reads the csv file and returns the list of potential questions
     def questions_reader(self):
         line_counter = 0
         print(self.used_question) 
@@ -34,17 +38,13 @@ class Questions:            #Using to
                 
 
 
-    
+    #function to select the randomised question
     def question_selector(self):
         list_number = randint(0, len(self.question_list)-1)
         self.selected_question = self.question_list[list_number]
 
-
-
-
-
+    #Returns the list of dialogue options related to the chosen list. 
     def dialogue_list(self):
-
         line_counter = 0
         for row in self.file_contents:
             if row[0] != self.selected_question:
@@ -52,8 +52,7 @@ class Questions:            #Using to
             else:
                 self.dialogue_options.extend([row[1],row[3],row[5]])
         
-      
-    
+
     def dialogue_type(self):            
         self.dialogue_types = {}
         line_counter = 0
@@ -66,7 +65,3 @@ class Questions:            #Using to
                         pass 
                     else:
                         self.dialogue_types[row[answer]] = row[answer+1]                       
-
-
-
-
