@@ -3,27 +3,8 @@ Software design and development major project 2021
 
 Might be maintained, maybe not
 
-
-FOR THOSE WHO ARE BETA TESTING (email for further inquiries or any problems):
-
-Please ensure that you have both python and PyQt5 installed. 
-2. TO INSTALL PYTHON AND PYQT5:
-  
-  
-  
-  
-  1. Install the latest version of python from python.org 
-  2. When using the installer, specify adding python to PATH
-  3. After installing python, windows users should use the comment prompt and type: pip install PyQt5
-  4. For Mac users:
-    	1. Open the terminal under the utilities folder 
-    	2. run the line: python3 -m pip install PyQt5
-
-
-
-
-
-
-
-After installing the PyQt5 library, run gui_windows.py 
-After testing please fill out: https://forms.gle/L12zyYWoxYM2PFmm9
+Post production thoughts and reflections:
+This is one of the worst projects that I have ever undertaken. Learnt a lot about realistic goal setting and general productivity methods, especially time management.  
+So many regrets after the due date, but it is what it is. 
+The most important thing I learnt, ironically, was how powerful classes were, and now I really have expanded my understanding of OOP. 
+My coding ability has 100% improved way more, and considering I had no idea what I was doing 15 months ago, I'm proud of how far I have come in terms of coding. 
